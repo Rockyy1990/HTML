@@ -1,0 +1,110 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .editor {
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            outline: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-2xl font-bold">Code Editor</h1>
+            <div>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded mr-2" onclick="newFile()">New File</button>
+                <button class="bg-green-500 text-white px-4 py-2 rounded" onclick="saveFile()">Save</button>
+            </div>
+        </div>
+        <div class="flex mb-4">
+            <select id="fileType" class="bg-white border border-gray-300 rounded px-4 py-2 mr-2">
+                <option value="bash">Bash</option>
+                <option value="python">Python</option>
+                <option value="c">C</option>
+                <option value="cpp">C++</option>
+                <option value="csharp">C#</option>
+                <option value="cmd">Windows CMD</option>
+                <option value="powershell">PowerShell</option>
+                <option value="html">HTML</option>
+                <option value="txt">Text</option>
+            </select>
+            <select id="eolType" class="bg-white border border-gray-300 rounded px-4 py-2">
+                <option value="lf">LF (Linux)</option>
+                <option value="crlf">CRLF (Windows)</option>
+                <option value="cr">CR (MacOS)</option>
+            </select>
+        </div>
+        <div contenteditable="true" id="editor" class="editor w-full h-96 bg-white border border-gray-300 rounded p-4" placeholder="Write your code here..."></div>
+    </div>
+
+    <script>
+        const fileExtensions = {
+            bash: '.sh',
+            python: '.py',
+            c: '.c',
+            cpp: '.cpp',
+            csharp: '.cs',
+            cmd: '.bat',
+            powershell: '.ps1',
+            html: '.html',
+            txt: '.txt'
+        };
+
+        const shebangs = {
+            bash: '#!/bin/bash',
+            python: '#!/usr/bin/env python3',
+            c: '',
+            cpp: '',
+            csharp: '',
+            cmd: '',
+            powershell: '',
+            html: '',
+            txt: ''
+        };
+
+        function newFile() {
+            const fileType = document.getElementById('fileType').value;
+            const editor = document.getElementById('editor');
+            editor.innerText = shebangs[fileType] ? shebangs[fileType] + '\n' : '';
+        }
+
+        function saveFile() {
+            const fileType = document.getElementById('fileType').value;
+            const editor = document.getElementById('editor');
+            const eolType = document.getElementById('eolType').value;
+            let content = editor.innerText;
+
+            if (eolType === 'crlf') {
+                content = content.replace(/\n/g, '\r\n');
+            } else if (eolType === 'cr') {
+                content = content.replace(/\n/g, '\r');
+            }
+
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'code' + fileExtensions[fileType];
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        document.getElementById('editor').addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                document.execCommand('insertText', false, '    ');
+            }
+        });
+    </script>
+</body>
+</html>

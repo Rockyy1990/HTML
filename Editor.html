@@ -1,0 +1,191 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/shell/shell.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .CodeMirror {
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex flex-col h-screen">
+        <header class="bg-blue-600 text-white p-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Code Editor</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="#" class="hover:underline">File</a></li>
+                    <li><a href="#" class="hover:underline">Edit</a></li>
+                    <li><a href="#" class="hover:underline">View</a></li>
+                    <li><a href="#" class="hover:underline">Help</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main class="flex flex-grow">
+            <aside class="bg-gray-200 w-64 p-4">
+                <h2 class="text-lg font-bold mb-4">File Explorer</h2>
+                <ul>
+                    <li class="mb-2"><i class="fas fa-folder mr-2"></i>Project</li>
+                    <li class="ml-4 mb-2"><i class="fas fa-file-code mr-2"></i>index.html</li>
+                    <li class="ml-4 mb-2"><i class="fas fa-file-code mr-2"></i>style.css</li>
+                    <li class="ml-4 mb-2"><i class="fas fa-file-code mr-2"></i>app.js</li>
+                </ul>
+            </aside>
+            <section class="flex-grow p-4">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex space-x-2">
+                        <button id="saveButton" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"><i class="fas fa-save mr-2"></i>Save</button>
+                        <button id="exportPdfButton" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"><i class="fas fa-file-pdf mr-2"></i>Export as PDF</button>
+                        <button id="exportTxtButton" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700"><i class="fas fa-file-alt mr-2"></i>Export as TXT</button>
+                        <button class="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"><i class="fas fa-undo mr-2"></i>Undo</button>
+                        <button class="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"><i class="fas fa-redo mr-2"></i>Redo</button>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"><i class="fas fa-search-minus"></i></button>
+                        <button class="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"><i class="fas fa-search-plus"></i></button>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="fileType" class="block text-lg font-bold mb-2">Select File Type:</label>
+                    <select id="fileType" class="w-full p-2 border border-gray-300 rounded">
+                        <option value="python">Python</option>
+                        <option value="bash">Bash</option>
+                        <option value="c">C</option>
+                        <option value="cpp">C++</option>
+                        <option value="csharp">C#</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="fontSelect" class="block text-lg font-bold mb-2">Select Font:</label>
+                    <select id="fontSelect" class="w-full p-2 border border-gray-300 rounded">
+                        <option value="'Courier New', Courier, monospace">Courier New</option>
+                        <option value="'Roboto Mono', monospace">Roboto Mono</option>
+                        <option value="'Fira Code', monospace">Fira Code</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="eolSelect" class="block text-lg font-bold mb-2">Select End of Line:</label>
+                    <select id="eolSelect" class="w-full p-2 border border-gray-300 rounded">
+                        <option value="lf">Linux (LF)</option>
+                        <option value="crlf">Windows (CRLF)</option>
+                    </select>
+                </div>
+                <textarea id="editor" class="editor w-full h-full p-4 border border-gray-300 rounded" placeholder="Start coding..."></textarea>
+            </section>
+        </main>
+    </div>
+    <script>
+        const editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
+            lineNumbers: true,
+            mode: 'python',
+            theme: 'dracula'
+        });
+
+        document.getElementById('fileType').addEventListener('change', (event) => {
+            const fileType = event.target.value;
+            let mode = 'python';
+            switch (fileType) {
+                case 'python':
+                    mode = 'python';
+                    break;
+                case 'bash':
+                    mode = 'shell';
+                    break;
+                case 'c':
+                    mode = 'text/x-csrc';
+                    break;
+                case 'cpp':
+                    mode = 'text/x-c++src';
+                    break;
+                case 'csharp':
+                    mode = 'text/x-csharp';
+                    break;
+            }
+            editor.setOption('mode', mode);
+        });
+
+        document.getElementById('fontSelect').addEventListener('change', (event) => {
+            const font = event.target.value;
+            document.querySelector('.CodeMirror').style.fontFamily = font;
+        });
+
+        document.getElementById('saveButton').addEventListener('click', () => {
+            const fileType = document.getElementById('fileType').value;
+            const eol = document.getElementById('eolSelect').value;
+            let code = editor.getValue();
+
+            let firstLine = '';
+            switch (fileType) {
+                case 'python':
+                    firstLine = '#!/usr/bin/env python3\n';
+                    break;
+                case 'bash':
+                    firstLine = '#!/bin/bash\n';
+                    break;
+                case 'c':
+                    firstLine = '#include <stdio.h>\n';
+                    break;
+                case 'cpp':
+                    firstLine = '#include <iostream>\n';
+                    break;
+                case 'csharp':
+                    firstLine = 'using System;\n';
+                    break;
+            }
+
+            if (!code.startsWith(firstLine)) {
+                code = firstLine + code;
+            }
+
+            if (eol === 'crlf') {
+                code = code.replace(/\n/g, '\r\n');
+            }
+
+            const blob = new Blob([code], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `code.${fileType}`;
+            a.click();
+        });
+
+        document.getElementById('exportPdfButton').addEventListener('click', () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const code = editor.getValue();
+            doc.setFont('Courier', 'normal');
+            doc.setFontSize(10);
+            doc.text(code, 10, 10);
+            doc.save('code.pdf');
+        });
+
+        document.getElementById('exportTxtButton').addEventListener('click', () => {
+            const eol = document.getElementById('eolSelect').value;
+            let code = editor.getValue();
+
+            if (eol === 'crlf') {
+                code = code.replace(/\n/g, '\r\n');
+            }
+
+            const blob = new Blob([code], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'code.txt';
+            a.click();
+        });
+    </script>
+</body>
+</html>
