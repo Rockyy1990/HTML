@@ -1,0 +1,87 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blu-ray Movie Database</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-4">
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h1 class="text-2xl font-bold">Blu-ray Movie Database</h1>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="createDatabase()">Create Database</button>
+            </div>
+            <div class="mb-4">
+                <input type="text" id="movieTitle" placeholder="Movie Title" class="border border-gray-300 rounded px-4 py-2 w-full mb-2">
+                <input type="text" id="movieGenre" placeholder="Genre" class="border border-gray-300 rounded px-4 py-2 w-full mb-2">
+                <input type="text" id="movieYear" placeholder="Year" class="border border-gray-300 rounded px-4 py-2 w-full mb-2">
+                <button class="bg-green-500 text-white px-4 py-2 rounded" onclick="addMovie()">Add Movie</button>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold mb-2">Movie List</h2>
+                <table class="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border-b">#</th>
+                            <th class="py-2 px-4 border-b">Title</th>
+                            <th class="py-2 px-4 border-b">Genre</th>
+                            <th class="py-2 px-4 border-b">Year</th>
+                        </tr>
+                    </thead>
+                    <tbody id="movieList">
+                        <!-- Movie items will be added here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let database = [];
+
+        function createDatabase() {
+            database = [];
+            document.getElementById('movieList').innerHTML = '';
+            alert('Database created successfully!');
+        }
+
+        function addMovie() {
+            const title = document.getElementById('movieTitle').value;
+            const genre = document.getElementById('movieGenre').value;
+            const year = document.getElementById('movieYear').value;
+
+            if (title && genre && year) {
+                const movie = { title, genre, year };
+                database.push(movie);
+                displayMovies();
+                clearInputs();
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+
+        function displayMovies() {
+            const movieList = document.getElementById('movieList');
+            movieList.innerHTML = '';
+            database.forEach((movie, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="py-2 px-4 border-b">${index + 1}</td>
+                    <td class="py-2 px-4 border-b">${movie.title}</td>
+                    <td class="py-2 px-4 border-b">${movie.genre}</td>
+                    <td class="py-2 px-4 border-b">${movie.year}</td>
+                `;
+                movieList.appendChild(row);
+            });
+        }
+
+        function clearInputs() {
+            document.getElementById('movieTitle').value = '';
+            document.getElementById('movieGenre').value = '';
+            document.getElementById('movieYear').value = '';
+        }
+    </script>
+</body>
+</html>
