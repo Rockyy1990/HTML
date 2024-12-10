@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startseite</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+            text-align: center;
+        }
+        
+        nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .button {
+            background-color: #3a3a3a;
+            color: #61dafb;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 20px;
+            margin: 4px 0; /* Reduced margin between buttons */
+            cursor: pointer;
+            transition: background-color 0.4s, color 0.5s;
+            text-align: center;
+            text-decoration: none;
+            width: 200px; /* Set a fixed width for buttons */
+        }
+        .button:hover {
+            background-color: #4a4a4a;
+            color: #21a1f1;
+        }
+        .time {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 41px;
+            margin-bottom: 10px; /* Reduced space between time and buttons */
+        }
+    </style>
+</head>
+<body>
+    <div class="time" id="time"></div>
+    
+    <a class="button" href="https://www.amazon.de" target="_blank">Amazon.de</a>
+    <a class="button" href="https://www.youtube.de" target="_blank">YouTube.de</a>
+    <a class="button" href="https://www.deskmodder.de" target="_blank">Deskmodder.de</a>
+    <a class="button" href="https://protonmail.com" target="_blank">ProtonMail</a>
+    <a class="button" href="https://protondrive.com" target="_blank">ProtonDrive</a>
+    <a class="button" href="https://drive.google.com" target="_blank">Google Drive</a>
+    <a class="button" href="https://github.com" target="_blank">GitHub</a>
+    <a class="button" href="https://uupdump.net" target="_blank">UUPDump.net</a>
+    
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const options = { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit', hour12: false };
+            const timeString = now.toLocaleTimeString('de-DE', options);
+            document.getElementById('time').textContent = timeString;
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime(); // Initial call to set the time immediately
+    </script>
+</body>
+</html>
