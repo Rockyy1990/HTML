@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startseite</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #2f343f, #3b414f);
+            animation: backgroundAnimation 10s ease infinite;
+        }
+
+        @keyframes backgroundAnimation {
+            0% { background-color: #2f343f; }
+            50% { background-color: #3b414f; }
+            100% { background-color: #2f343f; }
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            backdrop-filter: blur(15px);
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #66d9ef;
+        }
+
+        .link {
+            display: block;
+            margin: 15px 0;
+            text-decoration: none;
+            color: #66d9ef;
+            font-size: 20px;
+            border: 2px solid #66d9ef;
+            border-radius: 10px;
+            padding: 10px;
+            transition: all 0.3s;
+        }
+
+        .link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: #fff;
+            transform: scale(1.05);
+        }
+
+        .datetime {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Willkommen auf Ihrer Startseite</h1>
+    <a class="link" href="https://www.amazon.de" target="_blank">Amazon.de</a>
+    <a class="link" href="https://www.youtube.de" target="_blank">YouTube.de</a>
+    <a class="link" href="https://www.deskmodder.de" target="_blank">Deskmodder.de</a>
+    <a class="link" href="https://www.github.com" target="_blank">GitHub.com</a>
+    <a class="link" href="https://protonmail.com" target="_blank">ProtonMail</a>
+    <a class="link" href="https://protondrive.com" target="_blank">ProtonDrive</a>
+    <a class="link" href="https://drive.google.com" target="_blank">Google Drive</a>
+    <div class="datetime" id="datetime"></div>
+</div>
+
+<script>
+    function updateTime() {
+        const now = new Date();
+        const options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric', 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            second: '2-digit', 
+            hour12: false, 
+            timeZone: 'Europe/Berlin' 
+        };
+        document.getElementById('datetime').innerHTML = now.toLocaleString('de-DE', options);
+    }
+    setInterval(updateTime, 1000);
+    updateTime(); // Initial call to display time immediately
+</script>
+
+</body>
+</html>
