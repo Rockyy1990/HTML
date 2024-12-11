@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startseite</title>
+    <style>
+        body {
+            background-color: #ffffff; /* White background for a clean look */
+            color: #000000; /* Black text color for contrast */
+            font-family: 'Arial', sans-serif; /* Simple sans-serif font */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            position: relative; /* Position relative for absolute children */
+            transition: background-color 0.5s ease; /* Smooth background transition */
+        }
+        
+        nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px; /* Space between time and buttons */
+        }
+
+        .button {
+            background: #ffffff; /* White background for buttons */
+            color: #000000; /* Black text color */
+            border: 2px solid #000000; /* Black border for definition */
+            border-radius: 25px; /* More rounded corners for a smooth look */
+            padding: 12px 24px; /* Padding for buttons */
+            font-size: 18px; /* Font size for buttons */
+            margin: 10px 0; /* Margin for spacing */
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Smooth transitions */
+            text-align: center;
+            text-decoration: none;
+            width: 220px; /* Fixed width for buttons */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+
+        .button:hover {
+            background-color: #000000; /* Black background on hover */
+            color: #ffffff; /* White text color on hover */
+            transform: translateY(-2px); /* Lift effect on hover */
+        }
+
+        .time {
+            position: absolute;
+            top: 16%; /* Positioning the time at the top */
+            font-size: 60px; /* Larger font size for time */
+            color: #000000; /* Time color to match the theme */
+            font-weight: bold; /* Bold font for emphasis */
+            transition: color 0.5s ease; /* Smooth color transition */
+        }
+    </style>
+</head>
+<body>
+    <div class="time" id="time"></div>
+    
+    <nav>
+        <a class="button" href="https://www.amazon.de" target="_blank">Amazon.de</a>
+        <a class="button" href="https://www.youtube.de" target="_blank">YouTube.de</a>
+        <a class="button" href="https://www.deskmodder.de" target="_blank">Deskmodder.de</a>
+        <a class="button" href="https://protonmail.com" target="_blank">ProtonMail</a>
+        <a class="button" href="https://protondrive.com" target="_blank">ProtonDrive</a>
+        <a class="button" href="https://drive.google.com" target="_blank">Google Drive</a>
+        <a class="button" href="https://github.com" target="_blank">GitHub</a>
+        <a class="button" href="https://uupdump.net" target="_blank">UUPDump.net</a>
+    </nav>
+    
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const options = { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit', hour12: false };
+            const timeString = now.toLocaleTimeString('de-DE', options);
+            document.getElementById('time').textContent = timeString;
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime(); // Initial call to set the time immediately
+    </script>
+</body>
+</html>

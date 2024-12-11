@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startseite</title>
+    <style>
+        body {
+            background-color: #e0e0e0; /* Light gray background */
+            color: #000000; /* Black text color for contrast */
+            font-family: 'Arial', sans-serif; /* Simple sans-serif font */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            position: relative; /* Position relative for absolute children */
+            backdrop-filter: blur(15px); /* Increased blur effect for background */
+        }
+        
+        nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px; /* Space between time and buttons */
+        }
+
+        .button {
+            background: rgba(255, 255, 255, 0.85); /* Semi-transparent white background */
+            color: #000000; /* Black text color */
+            border: 1px solid #aaa; /* Slightly darker border for definition */
+            border-radius: 10px; /* More rounded corners */
+            padding: 12px 24px; /* Padding for buttons */
+            font-size: 18px; /* Font size for buttons */
+            margin: 10px 0; /* Margin for spacing */
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
+            text-align: center;
+            text-decoration: none;
+            width: 220px; /* Slightly wider buttons */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Deeper shadow for depth */
+        }
+
+        .button:hover {
+            background-color: rgba(255, 255, 255, 0.95); /* Slightly darker on hover */
+            color: #000000; /* Keep text color black */
+            transform: translateY(-3px); /* Lift effect on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+        }
+
+        .time {
+            position: absolute;
+            top: 16%; /* Positioning the time at the top */
+            font-size: 50px; /* Increased font size for time */
+            color: #000000; /* Time color to match the theme */
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8); /* Soft shadow for better readability */
+            transition: color 0.3s; /* Smooth transition for color */
+        }
+
+        /* Add a subtle animation to the time display */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .time {
+            animation: pulse 2s infinite; /* Pulsing effect */
+        }
+    </style>
+</head>
+<body>
+    <div class="time" id="time"></div>
+    
+    <nav>
+        <a class="button" href="https://www.amazon.de" target="_blank">Amazon.de</a>
+        <a class="button" href="https://www.youtube.de" target="_blank">YouTube.de</a>
+        <a class="button" href="https://www.deskmodder.de" target="_blank">Deskmodder.de</a>
+        <a class="button" href="https://protonmail.com" target="_blank">ProtonMail</a>
+        <a class="button" href="https://protondrive.com" target="_blank">ProtonDrive</a>
+        <a class="button" href="https://drive.google.com" target="_blank">Google Drive</a>
+        <a class="button" href="https://github.com" target="_blank">GitHub</a>
+        <a class="button" href="https://uupdump.net" target="_blank">UUPDump.net</a>
+    </nav>
+    
+    <script>
+        function updateTime() {
+            const now = new Date();
+ const options = { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit', hour12: false };
+            const timeString = now.toLocaleTimeString('de-DE', options);
+            document.getElementById('time').textContent = timeString;
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime(); // Initial call to set the time immediately
+    </script>
+</body>
+</html>
