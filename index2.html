@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startseite</title>
+    <style>
+        body {
+            font-family: 'Monaco', monospace;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 88vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #2e3436, #3b4144);
+            animation: backgroundAnimation 8s ease infinite;
+        }
+
+        @keyframes backgroundAnimation {
+            0% { background-color: #2e3436; }
+            50% { background-color: #3b4144; }
+            100% { background-color: #2e3436; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+            backdrop-filter: blur(18px);
+            transition: opacity 0.4s;
+        }
+
+        .container:hover {
+            opacity: 0.9;
+        }
+
+        .container {
+            opacity: 0.5;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .links {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .container:hover .links {
+            display: block;
+        }
+
+        .link {
+            display: block;
+            margin: 10px 0;
+            text-decoration: none;
+            color: #66d9ef;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .link:hover {
+            color: #ffcc00;
+            text-decoration: underline;
+        }
+
+        .datetime {
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Willkommen auf Ihrer Startseite</h1>
+    <div class="links">
+        <a class="link" href="https://www.amazon.de" target="_blank">Amazon.de</a>
+        <a class="link" href="https://www.youtube.de" target="_blank">YouTube.de</a>
+        <a class="link" href="https://www.deskmodder.de" target="_blank">Deskmodder.de</a>
+        <a class="link" href="https://www.github.com" target="_blank">GitHub.com</a>
+        <a class="link" href="https://protonmail.com" target="_blank">ProtonMail</a>
+        <a class="link" href="https://protondrive.com" target="_blank">ProtonDrive</a>
+        <a class="link" href="https://drive.google.com" target="_blank">Google Drive</a>
+    </div>
+    <div class="datetime" id="datetime"></div>
+</div>
+
+<script>
+    function updateTime() {
+        const now = new Date();
+        const options = { 
+            weekday: 'long', 
+            month: 'long', 
+			year: 'numeric',
+            day: 'numeric', 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            second: '2-digit', 
+            hour12: false, 
+            timeZone: 'Europe/Berlin' 
+        };
+        document.getElementById('datetime').innerHTML = now.toLocaleString('de-DE', options);
+    }
+    setInterval(updateTime, 1000);
+    updateTime(); // Initial call to display time immediately
+</script>
+
+</body>
+</html>
