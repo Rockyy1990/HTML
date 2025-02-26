@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interaktive Webseite</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #a9a9a9, #aeaeae); /* Plasma-Hintergrund */
+            font-family: 'Arial', sans-serif;
+            color: #ffffff; /* Helle Schriftfarbe */
+            line-height: 1.6;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -200px; /* Ausblenden der Seitenleiste */
+            width: 200px;
+            height: 100%;
+            background-color: rgba(50, 50, 50, 0.9); /* Dunkler und transparenter */
+            transition: left 0.3s ease; /* Sanfte Animation */
+            padding: 20px;
+            box-shadow: 2px 0 6px rgba(0, 0, 0, 0.4);
+            z-index: 1000; /* Sicherstellen, dass die Seitenleiste über dem Inhalt liegt */
+        }
+
+        .sidebar a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: background-color 0.3s, transform 0.3s; /* Sanfte Animation */
+        }
+
+        .sidebar a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.06); /* Leichtes Vergrößern beim Hover */
+        }
+
+        .corner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .content {
+            margin-left: 245px; /* Platz für die Seitenleiste */
+            padding: 20px;
+            transition: margin-left 0.3s ease; /* Sanfte Animation */
+        }
+
+        h1 {
+            color: #ffffff; /* Helle Farbe für den Titel */
+        }
+
+        p {
+            margin: 10px 0; /* Abstand zwischen den Absätzen */
+        }
+
+        .clock {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: #ffffff; /* Helle Schriftfarbe für die Uhr */
+            z-index: 1001; /* Sicherstellen, dass die Uhr über dem Inhalt liegt */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="clock" id="clock"></div> <!-- Uhr hinzufügen -->
+
+    <div class="sidebar" id="sidebar" onmouseover="showSidebar()" onmouseout="hideSidebar()">
+        <h2>Navigation</h2>
+        <a href="https://example.com/link1" target="_blank">Link 1</a>
+        <a href="https://example.com/link2" target="_blank">Link 2</a>
+        <a href="https://example.com/link3" target="_blank">Link 3</a>
+        <a href="https://example.com/link4" target="_blank">Link 4</a>
+        <a href="https://example.com/link5" target="_blank">Link 5</a>
+        <a href="https://example.com/link6" target="_blank">Link 6</a>
+    </div>
+
+    <div class="corner" onmouseover="showSidebar()"></div>
+
+    <div class="content" id="content">
+        <h1>Willkommen!</h1>
+        <p >Dies ist ein Testtext, der auf der restlichen Seite angezeigt wird. Bewege den Mauszeiger in die linke obere Ecke, um die Seitenleiste mit Links anzuzeigen.</p>
+        <p>Hier kannst du weitere Inhalte hinzufügen, um die Webseite interessanter zu gestalten.</p>
+        <p>Die Seitenleiste bleibt geöffnet, solange du mit der Maus darüber fährst, und der Inhalt wird nicht verdeckt.</p>
+    </div>
+
+    <script>
+        function showSidebar() {
+            document.getElementById('sidebar').style.left = '0'; // Seitenleiste anzeigen
+            document.getElementById('content').style.marginLeft = '220px'; // Inhalt verschieben
+        }
+
+        function hideSidebar() {
+            if (!document.getElementById('sidebar').matches(':hover')) {
+                document.getElementById('sidebar').style.left = '-210px'; // Seitenleiste ausblenden
+                document.getElementById('content').style.marginLeft = '245px'; // Inhalt zurück verschieben
+            }
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const options = { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById('clock').textContent = now.toLocaleTimeString('de-DE', options); // Uhrzeit aktualisieren
+        }
+
+        setInterval(updateClock, 1000); // Uhr jede Sekunde aktualisieren
+        updateClock(); // Uhr beim Laden der Seite initialisieren
+    </script>
+
+</body>
+</html>
