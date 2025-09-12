@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        <div class="clock" id="clock"></div>
+        <div class="links">
+            <a href="https://www.amazon.de" target="_blank">Amazon</a>
+            <a href="https://www.youtube.de" target="_blank">Youtube</a>
+            <a href="https://www.deskmodder.de" target="_blank">Deskmodder</a>
+            <a href="https://www.distrowatch.com" target="_blank">Distrowatch</a>
+            <a href="https://account.proton.me/mail" target="_blank">Protonmail</a>
+            <a href="https://account.proton.me/drive" target="_blank">Proton Drive</a>
+            <a href="https://workspace.google.com/intl/de/products/drive/" target="_blank">Google Drive</a>
+            <a href="https://github.com/Rockyy1990?tab=repositories" target="_blank">Github Repo</a>
+            <a href="https://github.com/GloriousEggroll/proton-ge-custom/releases/" target="_blank">ProtonGE</a>
+	        <a href="http://192.168.10.14:90/login.html" target="_blank">Adguard Home</a>
+	        <a href="https://192.168.10.14:10000" target="_blank">Webmin</a>
+            <a href="https://192.168.10.10" target="_blank">Router Settings</a>
+		</div>
+    </div>
+	<script>
+        function updateClock() {
+            const now = new Date();
+            const options = { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit' };
+            document.getElementById('clock').textContent = now.toLocaleTimeString('de-DE', options);
+        }
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call
+    </script>
+</body>
+</html>
