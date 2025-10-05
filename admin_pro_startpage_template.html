@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Startup - Welcome</title>
+  <meta name="description" content="Professional startup landing page with quick links to essential services and resources." />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --surface: #141a2b;
+      --surface-2: #1e2540;
+      --text: #e8eaf6;
+      --muted: #a6b0d6;
+      --accent: #6ea8fe;
+      --card: #0f1630;
+      --radius: 12px;
+      --gap: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: radial-gradient( circle at 20% -10%, rgba(110,168,254,.15), transparent 40%), radial-gradient( circle at 100% 0%, rgba(120, 92, 182,.15), transparent 40%), var(--bg); color: var(--text); }
+
+    header {
+      max-width: 1100px; margin: 40px auto 20px auto; padding: 0 16px;
+    }
+
+    .brand {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand h1 {
+      font-size: 1.6rem; margin: 0;
+    }
+
+    nav a {
+      color: var(--text); text-decoration: none; padding: 8px 12px; border-radius: 999px;
+      transition: background .2s;
+    }
+    nav a:hover { background: rgba(110,168,254,.25); }
+
+    main {
+      max-width: 1100px; margin: 0 auto; padding: 0 16px 40px;
+    }
+
+    .hero {
+      display: grid; gap: 24px; align-items: center;
+      grid-template-columns: 1.05fr 0.95fr;
+      padding: 28px; border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(20,26,48,.9), rgba(20,26,48,.6) 60%), rgba(20,26,48,.5);
+      border: 1px solid rgba(255,255,255,.06);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+
+    .hero .copy h2 { margin: 0 0 8px 0; font-size: 2rem; }
+    .hero .copy p { color: var(--muted); margin: 0 0 12px; }
+    .cta {
+      display: flex; flex-wrap: wrap; gap: 12px;
+    }
+    .btn {
+      padding: 12px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.15);
+      color: #fff; text-decoration: none; font-weight: 600; background: rgba(110,168,254,.25);
+      transition: transform .2s, background .2s;
+    }
+    .btn.secondary { background: rgba(255,255,255,.05); color: #e6ecff; }
+    .btn:hover { transform: translateY(-1px); background: rgba(110,168,254,.4); }
+    .hero-media {
+      display: grid; place-items: center;
+      min-height: 260px; border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(110,168,254,.15), rgba(110,168,254,.0) 60%);
+      border: 1px solid rgba(110,168,254,.25);
+    }
+
+    /* Link grid */
+    .links {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: var(--gap); margin: 40px 0;
+    }
+    .card {
+      background: rgba(20,26,48,.9);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding: 16px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      min-height: 110px;
+    }
+    .card h3 { margin: 6px 0 8px; font-size: 1.05rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .92rem; }
+
+    footer {
+      text-align: center; color: var(--muted); padding: 28px 0;
+      border-top: 1px solid rgba(255,255,255,.08);
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding: 20px; }
+      .hero-media { min-height: 180px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand" aria-label="Site header">
+      <h1>Your Startup</h1>
+      <nav aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#links">Links</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="Intro section">
+      <div class="copy">
+        <h2>Professional startup landing template</h2>
+        <p>Quickly share essential tools and resources with visitors. Each link opens in a new tab for smooth browsing.</p>
+        <div class="cta" id="cta-actions">
+          <a class="btn" href="#links" aria-label="Jump to links section">Explore links</a>
+          <a class="btn secondary" href="mailto:hello@example.com" aria-label="Email us">Contact us</a>
+        </div>
+      </div>
+      <div class="hero-media" aria-label="Hero illustration placeholder">
+        <!-- Placeholder graphic; replace with your image if desired -->
+        <svg width="180" height="120" role="img" aria-label="Startup illustration" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160">
+          <defs>
+            <linearGradient id="g" x1="0"x2="1" y1="0" y2="1">
+              <stop stop-color="#6ea8fe" offset="0"/>
+              <stop stop-color="#8b5cf6" offset="1"/>
+            </linearGradient>
+          </defs>
+          <rect width="240" height="160" rx="20" fill="url(#g)"/>
+          <circle cx="60" cy="60" r="14" fill="white" opacity=".8"/>
+          <circle cx="110" cy="90" r="8" fill="white" opacity=".8"/>
+          <rect x="140" y="40" width="60" height="60" rx="10" fill="white" opacity=".9"/>
+        </svg>
+      </div>
+    </section>
+
+    <section id="links" aria-label="External links" class="links-container">
+      <h2 style="font-size:1.25rem; margin:0 0 12px;">Useful resources</h2>
+      <div class="links" id="links-grid">
+        <article class="card" aria-label="Link to Amazon Germany">
+          <div>
+            <h3>Amazon Germany</h3>
+            <p>Shop and compare products on amazon.de</p>
+          </div>
+          <a class="btn" href="https://www.amazon.de" target="_blank" rel="noopener noreferrer" aria-label="Open Amazon Germany in new tab">Open</a>
+        </article>
+
+        <article class="card" aria-label="Link to YouTube">
+          <div>
+            <h3>YouTube</h3>
+            <p>Watch and upload videos</p>
+          </div>
+          <a class="btn" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="Open YouTube in new tab">Open</a>
+        </article>
+
+        <article class="card" aria-label="Link to DeskModder Germany">
+          <div>
+            <h3>DeskModder Germany</h3>
+            <p>Tech guides and tutorials</p>
+          </div>
+          <a class="btn" href="https://www.deskmodder.de" target="_blank" rel="noopener noreferrer" aria-label="Open DeskModder in new tab">Open</a>
+        </article>
+
+        <article class="card" aria-label="Link to Distrowatch">
+          <div>
+            <h3>Distrowatch</h3>
+            <p>Linux distribution information</p>
+          </div>
+          <a class="btn" href="https://distrowatch.com" target="_blank" rel="noopener noreferrer" aria-label="Open Distrowatch in new tab">Open</a>
+        </article>
+
+        <article class="card" aria-label="Link to ProtonMail">
+          <div>
+            <h3>ProtonMail</h3>
+            <p>Secure email service</p>
+          </div>
+          <a class="btn" href="https://protonmail.com" target="_blank" rel="noopener noreferrer" aria-label="Open ProtonMail in new tab">Open</a>
+        </article>
+
+        <article class="card" aria-label="Link to Proton Drive">
+          <div>
+            <h3>Proton Drive</h3>
+            <p>Secure cloud storage</p>
+          </div>
+          <a class="btn" href="https://drive.proton.me" target="_blank" rel="noopener noreferrer" aria-label="Open Proton Drive in new tab">Open</a>
+        </article>
+
+        <article class="card" aria-label="Link to Google Drive">
+          <div>
+            <h3>Google Drive</h3>
+            <p>Cloud storage and collaboration</p>
+          </div>
+          <a class="btn" href="https://drive.google.com" target="_blank" rel="noopener noreferrer" aria-label="Open Google Drive in new tab">Open</a>
+        </article>
+
+        <article class="card" aria-label="Link to GitHub">
+          <div>
+            <h3>GitHub</h3>
+            <p>Code hosting and collaboration</p>
+          </div>
+          <a class="btn" href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub in new tab">Open</a>
+        </article>
+
+        <article class="card" aria-label="Link to AdGuard Home">
+          <div>
+            <h3>AdGuard Home</h3>
+            <p>Network-wide ad blocking</p>
+          </div>
+          <a class="btn" href="https://adguard.com/en/adguard-home/overview.html" target="_blank" rel="noopener noreferrer" aria-label="Open AdGuard Home in new tab">Open</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" aria-label="About section" style="margin-top:20px;">
+      <h2 style="font-size:1.25rem; margin:0 0 8px;">About this template</h2>
+      <p style="color:var(--muted); max-width:720px;">
+        A simple, responsive startup landing page template with a focus on quick access to essential external resources. It includes clean typography, a responsive grid of link cards, and accessible semantics.
+      </p>
+    </section>
+
+    <section id="contact" aria-label="Contact section" style="margin-top:20px;">
+      <h2 style="font-size:1.25rem; margin:0 0 8px;">Contact</h2>
+      <p style="color:var(--muted);">Have questions? Reach out at <a href="mailto:hello@example.com" style="color:var(--accent); text-decoration:underline;">hello@example.com</a></p>
+    </section>
+  </main>
+
+  <footer role="contentinfo" aria-label="Site footer">
+    © <span id="year"></span> Your Startup. All rights reserved.
+  </footer>
+
+  <script>
+    // Simple dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

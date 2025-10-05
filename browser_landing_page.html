@@ -1,0 +1,228 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+<title>Transparent Landing - 8 Links</title> <style> :root{ --bg: #0b1020; --card: rgba(255, 255, 255, 0.08); --card-border: rgba(255,255,255,0.18); --text: #e9f0ff; --muted: #b8c0e6; --accent: rgba(120, 170, 255, 0.9); --shadow: 0 8px 28px rgba(0,0,0,0.25); }
+
+ 
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  color:var(--text);
+  background: radial-gradient(circle at 20% -10%, rgba(80,120,240,.25), transparent 40%),
+              radial-gradient(circle at 90% 20%, rgba(0, 200, 255, .15), transparent 35%),
+              linear-gradient(135deg, #0b0f1a 0%, #0a1020 60%, #0b1020 100%);
+  min-height:100%;
+  overflow-y:auto;
+}
+
+/* Subtle animated background glow */
+.bg-orb {
+  position: fixed;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(120,170,255,.9), transparent 40%);
+  filter: blur(40px);
+  opacity:.25;
+  pointer-events:none;
+  transform: translateZ(0);
+  z-index: 0;
+  animation: drift 20s linear infinite;
+}
+@keyframes drift {
+  0% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(60px, -40px) scale(1.05); }
+  100%{ transform: translate(0,0) scale(1); }
+}
+.bg-orb.a{ top:6%; left:8%}
+.bg-orb.b{ bottom:10%; right:12%; animation-duration: 28s; opacity:.18 }
+
+header {
+  position: relative;
+  z-index: 1;
+  padding: 48px 20px 16px;
+  text-align: center;
+}
+.brand {
+  display: inline-flex; align-items: baseline; gap: 12px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--card-border);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: saturate(1.2) blur(6px);
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+.brand .dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #7ad7ff;
+  box-shadow: 0 0 0 6px rgba(122,215,255,.15);
+}
+h1 {
+  font-size: 2rem;
+  margin: 18px 0 6px;
+  letter-spacing: .4px;
+}
+p.subtitle {
+  color:var(--muted);
+  margin: 0 0 6px;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  padding: 16px 20px 60px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 18px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.card {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 18px;
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 110px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.22);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform .6s cubic-bezier(.2,.8,.2,1), opacity .6s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(255,255,255,.34);
+  box-shadow: 0 14px 28px rgba(0,0,0,.28);
+}
+
+.card:before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(135deg, rgba(122,215,255,.4), rgba(122,215,255,0) 40%);
+  filter: saturate(1.2);
+  z-index: 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+
+.card:hover:before { opacity: 1; }
+
+.card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  z-index: 1;
+  position: relative;
+}
+.card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .92rem;
+  z-index: 1;
+  position: relative;
+}
+
+.badge {
+  font-size: .75rem;
+  padding: 4px 8px;
+  border-radius: 999px;
+  display: inline-block;
+  align-self: flex-start;
+  background: rgba(0,0,0,.15);
+  color: #e8f4ff;
+  border: 1px solid rgba(255,255,255,.25);
+  z-index: 1;
+}
+
+/* reveal animation for cards after load */
+.grid .card.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+footer {
+  text-align:center;
+  color: var(--muted);
+  padding: 28px 12px 60px;
+  font-size: .9rem;
+  opacity: .9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid .card { transition: none; transform: none; opacity: 1; }
+  .card:hover { transform: none; }
+  @keyframes drift { from { transform: none } to { transform: none } }
+}
+
+</style> 
+</head> 
+<body> 
+<div class="bg-orb a" aria-hidden="true"></div> <div class="bg-orb b" aria-hidden="true"></div> 
+<header> <div class="brand" aria-label="Brand"> <span class="dot" aria-hidden="true"></span> <span>Transparent Landing</span> </div> <h1>Introductory Links</h1> <p class="subtitle">Eight placeholder links with glassy transparency and slide effects. Open in new tabs.</p> </header> <main> <section class="grid" aria-label="Placeholder links grid"> <!-- 8 placeholder links that open in a new tab --> <a class="card" href="https://example.com/placeholder-1" target="_blank" rel="noopener noreferrer" aria-label="Open placeholder link 1 in a new tab"> <span class="badge" aria-label="Link 1 badge">Link 1</span> <h3>Placeholder Link 1</h3> <p>Open in a new tab to see the effect.</p> </a>
+
+ 
+  <a class="card" href="https://example.com/placeholder-2" target="_blank" rel="noopener noreferrer" aria-label="Open placeholder link 2 in a new tab">
+    <span class="badge" aria-label="Link 2 badge">Link 2</span>
+    <h3>Placeholder Link 2</h3>
+    <p>Glass effect with transparency.</p>
+  </a>
+
+  <a class="card" href="https://example.com/placeholder-3" target="_blank" rel="noopener noreferrer" aria-label="Open placeholder link 3 in a new tab">
+    <span class="badge" aria-label="Link 3 badge">Link 3</span>
+    <h3>Placeholder Link 3</h3>
+    <p>Hover to see a glow and lift.</p>
+  </a>
+
+  <a class="card" href="https://example.com/placeholder-4" target="_blank" rel="noopener noreferrer" aria-label="Open placeholder link 4 in a new tab">
+    <span class="badge" aria-label="Link 4 badge">Link 4</span>
+    <h3>Placeholder Link 4</h3>
+    <p>Transparent card with blur backdrop.</p>
+  </a>
+
+  <a class="card" href="https://example.com/placeholder-5" target="_blank" rel="noopener noreferrer" aria-label="Open placeholder link 5 in a new tab">
+    <span class="badge" aria-label="Link 5 badge">Link 5</span>
+    <h3>Placeholder Link 5</h3>
+    <p>Clean and minimal interface.</p>
+  </a>
+
+  <a class="card" href="https://example.com/placeholder-6" target="_blank" rel="noopener noreferrer" aria-label="Open placeholder link 6 in a new tab">
+    <span class="badge" aria-label="Link 6 badge">Link 6</span>
+    <h3>Placeholder Link 6</h3>
+    <p>Responsive grid layout.</p>
+  </a>
+
+  <a class="card" href="https://example.com/placeholder-7" target="_blank" rel="noopener noreferrer" aria-label="Open placeholder link 7 in a new tab">
+    <span class="badge" aria-label="Link 7 badge">Link 7</span>
+    <h3>Placeholder Link 7</h3>
+    <p>Uses semi-transparent surfaces.</p>
+  </a>
+
+  <a class="card" href="https://example.com/placeholder-8" target="_blank" rel="noopener noreferrer" aria-label="Open placeholder link 8 in a new tab">
+    <span class="badge" aria-label="Link 8 badge">Link 8</span>
+    <h3>Placeholder Link 8</h3>
+    <p>Finish with a soft glow on hover.</p>
+  </a>
+</section>
+
+</main> <footer aria-label="Footer"> © 2025 Transparent Landing. All placeholder links open in a new tab. </footer> <script> // Simple staggered reveal of cards after load window.addEventListener('DOMContentLoaded', () => { const cards = document.querySelectorAll('.grid .card'); cards.forEach((card, idx) => { // stagger delay const delay = Math.min(3500, 150 * idx); setTimeout(() => { card.classList.add('revealed'); }, delay); }); }); </script> </body> </html>
