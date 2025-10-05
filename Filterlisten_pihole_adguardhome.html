@@ -1,0 +1,51 @@
+<!DOCTYPE html> 
+<html lang="de"> 
+<head> <meta charset="UTF-8" /> 
+<title>Blocklisten für Pi-hole & AdGuard Home</title> 
+</head> 
+<body> <h1>Blocklisten</h1> 
+
+<section aria-labelledby="pihole-lists"> 
+<h2 id="pihole-lists">Pi-hole – 12 Blocklisten</h2>
+ <ul> <li><a href="https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts" target="_blank" rel="noopener">StevenBlack/hosts</a></li> 
+ <li><a href="https://raw.githubusercontent.com/mitchellkrogza/Hide-Files-and-Disallowed-Content/master/hosts" target="_blank" rel="noopener">Hide-Files-and-Disallowed-Content</a></li> 
+ <li><a href="https://raw.githubusercontent.com/FadeChan/hosts/master/hosts" target="_blank" rel="noopener">FadeChan/hosts</a></li> 
+ <li><a href="https://v.firebog.net/hosts/AdguardDNS.txt" target="_blank" rel="noopener">Firebog – AdGuardDNS</a></li> 
+ <li><a href="https://v.firebog.net/hosts/Admiral.txt" target="_blank" rel="noopener">Firebog – Admiral</a></li> 
+ <li><a href="https://v.firebog.net/hosts/py3-hosts.txt" target="_blank" rel="noopener">Firebog – py3-hosts</a></li> 
+ <li><a href="https://v.firebog.net/hosts/w3khosts.txt" target="_blank" rel="noopener">Firebog – w3khosts</a></li> 
+ <li><a href="https://mirror1.malwaredomains.com/files/hosts" target="_blank" rel="noopener">Malware Domains</a></li> 
+ <li><a href="https://hosts.zen.spamhaus.org/hosts" target="_blank" rel="noopener">Spamhaus Zen</a></li> 
+ <li><a href="https://hosts.achteinander.de/hosts" target="_blank" rel="noopener">Achteinander – Hostliste</a></li> 
+ <li><a href="https://raw.githubusercontent.com/mitchellkrogza/Blacklist/master/hosts" target="_blank" rel="noopener">MitchellKrogza – Blacklist</a></li> 
+ <li><a href="https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts" target="_blank" rel="noopener">StevenBlack (weitere Kopie)</a></li> 
+ </ul> </section> 
+ <section aria-labelledby="adguard-lists"> <h2 id="adguard-lists">AdGuard Home – 12 Blocklisten</h2> 
+ <ul> 
+ <li><a href="https://adguardteam.github.io/hosts/filters-raw.txt" target="_blank" rel="noopener">AdGuard – Filters Raw</a></li> 
+ <li><a href="https://raw.githubusercontent.com/AdguardTeam/Filters/master/neutralize.txt" target="_blank" rel="noopener">AdGuard – Neutralize</a></li> 
+ <li><a href="https://raw.githubusercontent.com/AdguardTeam/Filters/master/whitelist.txt" target="_blank" rel="noopener">AdGuard – Whitelist</a></li> 
+ <li><a href="https://raw.githubusercontent.com/AdguardTeam/ExtendedLogs/master/hosts.txt" target="_blank" rel="noopener">AdGuard – Extended Logs</a></li> 
+ <li><a href="https://raw.githubusercontent.com/AdguardTeam/AdGuardSDNSFilter/master/filters/filter_ranom.txt" target="_blank" rel="noopener">AdGuard SDNS – Filter Ranom</a></li> 
+ <li><a href="https://raw.githubusercontent.com/Definitive-Blocklists/hosts/master/hosts" target="_blank" rel="noopener">Definitive Blocklists – Hosts</a></li> 
+ <li><a href="https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts" target="_blank" rel="noopener">StevenBlack (AdGuard geeignet)</a></li> 
+ <li><a href="https://hosts.zen.spamhaus.org/hosts" target="_blank" rel="noopener">Spamhaus Zen</a></li> 
+ <li><a href="https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt" target="_blank" rel="noopener">Disconnect.me – Ads</a></li> 
+ <li><a href="https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt" target="_blank" rel="noopener">Disconnect.me – Tracking</a></li> 
+ <li><a href="https://raw.githubusercontent.com/mitchellkrogza/Blacklist/master/hosts" target="_blank" rel="noopener">MitchellKrogza – Blacklist</a></li> 
+ <li><a href="https://raw.githubusercontent.com/mitchellkrogza/PhishingList/master/hosts" target="_blank" rel="noopener">PhishingList</a></li> 
+ </ul> 
+ </section> 
+ <section id="regex-blocklists" aria-label="Regex-Einträge zum Blocken von Werbung und Trackern"> 
+ <p>8 Regex-Einträge zum Blocken von Werbung und Trackern (PCRE/AdGuard Regex-Syntax). Hinweis: Regex-Einträge werden oft in AdGuard/Suricata/Pi-hole mit Regex-Blocklisten genutzt.</p> 
+ <p><strong>Ad-Server/Tracking-Domains allgemein (case-insensitive)</strong> <pre><code>(?i)^https?://.(doubleclick|googlesyndication|google-analytics|googletagservices|adservice|adsbygoogle|advertising|tracker|track|banner|adverts|ads).$</code></pre></p> 
+ <p><strong>Beliebte Werbe-CDNs blockieren</strong> <pre><code>(?i)^https?://.(cdn(\.google|adtech|adservice|googleadservices|akamaihd|cloudfront|scorecardresearch|advertising).*)$</code></pre></p> 
+ <p><strong>Social-Buttons/Trackers (Facebook/Twitter/etc.)</strong> <pre><code>(?i)^https?://.(facebook|twitter|linkedin|gravatar|pinterest|instagram|snapchat|t.co|facebook.net|fbcdn).$</code></pre></p> 
+ <p><strong>Google-Dienste/Analytics schwerpunktmäßig</strong> <pre><code>(?i)^https?://.(google-analytics|googletagservices|googleadservices|pagead|googlead|googlesyndication|doubleclick|googletag).$</code></pre></p> 
+ <p><strong>Mixer/Video-Werbung (YouTube-Ads etc.)</strong> <pre><code>(?i)^https?://.(googlevideo|ytimg|youtube|rtd.googlevideo|ytimg|ads.youtube).*$</code></pre></p> 
+ <p><strong>Affiliate/Tracking-Kennzahlen</strong> <pre><code>(?i)^https?://.(affiliates|tracker|click|redirect|rdr|doubleclick|ad.doubleclick.net).$</code></pre></p> 
+ <p><strong>Bannernetzwerke allgemein</strong> <pre><code>(?i)^https?://.(banner|advert|ads|adserver|adserver|mediaforge|adman|adsystem|advertising).$</code></pre></p> 
+ <p><strong>Häufige Tracking-Hosts (kleine Muster)</strong> <pre><code>(?i)^https?://.(tracking|track|analytics|stat|hit|metrics|collect).$</code></pre></p> 
+ </section>
+ </body> 
+ </html>
